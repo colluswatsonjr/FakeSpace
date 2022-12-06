@@ -21,3 +21,16 @@
 .App-link {
   color: #61dafb;
 }
+
+.Navbar {
+  color: #61dafb;
+  width: 100%;
+  list-style: none;
+  /* background-color: black; */
+}
+.Navlink {
+  color: #61dafb;
+  width: auto;
+  display: inline-block;
+  /* background-color: teal; */
+}

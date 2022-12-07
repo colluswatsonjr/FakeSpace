@@ -6,6 +6,7 @@ import MySpace from './pages/MySpace';
 import './App.css';
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
+import WorldSpace from "./pages/WorldSpace";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -14,7 +15,7 @@ function App() {
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
-      }else{console.log(r)}
+      } else { console.log(r) }
     });
   }, [])
 
@@ -25,9 +26,9 @@ function App() {
       <h1>FakeSpace</h1>
       <BrowserRouter>
         <Navbar />
-        {/* <MySpace user={user} /> */}
         <Routes>
-          <Route path="/" element={<MySpace user={user} setUser={setUser} />} />
+          <Route path="/" element={<WorldSpace />} />
+          <Route path="/user" element={<MySpace user={user} setUser={setUser} />} />
         </Routes>
       </BrowserRouter>
 

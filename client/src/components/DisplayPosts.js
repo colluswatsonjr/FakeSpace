@@ -16,9 +16,7 @@ function DisplayPosts({ userId, setPosts, posts }) {
     function DisplayDeleteBtn(post) {
         if (post.username === userId) {
             return <button onClick={() => handleDelete(post.id)}>x</button>
-        } else {
-            console.log(false)
-        }
+        } 
     }
 
     return (

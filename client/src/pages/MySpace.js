@@ -3,9 +3,7 @@ import EditUserForm from "../components/EditUserForm";
 
 
 function MySpace({ user, setUser }) {
-
-    console.log(user)
-
+    
     const [isEditing, setIsEditing] = useState(false);
 
     function handleLogout() {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import DisplayPage from "../components/DisplayPage";
 
-function WorldSpace() {
+function WorldSpace({user}) {
     const [page, setPage] = useState(null)
     const [pages, setPages] = useState([])
 
@@ -14,7 +14,9 @@ function WorldSpace() {
         });
     }, [])
 
-    if (page) return <DisplayPage page={page} goBack={()=>setPage(null)}/>;
+    if (page) return <DisplayPage user={user} page={page} setPage={()=>setPage(null)}/>;
+
+    console.log(page)
 
     return (
         <div>
@@ -26,7 +28,6 @@ function WorldSpace() {
                         <p>{page.bio}</p>
                     </div>
                 )
-
             })}
         </div>
     )

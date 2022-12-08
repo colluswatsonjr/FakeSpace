@@ -1,7 +1,13 @@
+import { useState } from "react"
 import CreatePost from "./CreatePost"
+import DisplayPosts from "./DisplayPosts"
 
 
-function DisplayPage({ page, goBack }) {
+function DisplayPage({ user, page, setPage }) {
+
+    console.log(user, page)
+
+    const [posts, setPosts] = useState(page.posts)
 
     return (
         <div>
@@ -10,10 +16,12 @@ function DisplayPage({ page, goBack }) {
             <div key={page.id} onClick={() => console.log(page)}>
                 <h4>{page.title}</h4>
                 <p>{page.bio}</p>
-                <button onClick={()=>goBack(null)}>Back</button>
+                <button onClick={setPage}>Back</button>
             </div>
 
-            <CreatePost />
+            <CreatePost pageId={page.id} posts={posts} setPosts={setPosts}/>
+            <DisplayPosts userId={user.username} posts={posts} setPosts={setPosts}/>
+
         </div>
     )
 }

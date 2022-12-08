@@ -27,7 +27,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<WorldSpace />} />
+          <Route path="/" element={<WorldSpace user={user} />} />
           <Route path="/user" element={<MySpace user={user} setUser={setUser} />} />
         </Routes>
       </BrowserRouter>

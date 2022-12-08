@@ -1,5 +1,11 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :page_id, :text
-  belongs_to :user
-  belongs_to :page
+  attributes :id, :username, :pagename, :text
+  def username
+    "#{self.object.user.username}"
+  end
+  def pagename
+    "#{self.object.page.title}"
+  end
+  # belongs_to :user
+  # belongs_to :page
 end

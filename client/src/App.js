@@ -7,6 +7,7 @@ import './App.css';
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import WorldSpace from "./pages/WorldSpace";
+import CreateSpace from "./pages/CreateSpace";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -28,6 +29,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<WorldSpace user={user} />} />
+          <Route path="/create" element={<CreateSpace user={user}/>} />
           <Route path="/user" element={<MySpace user={user} setUser={setUser} />} />
         </Routes>
       </BrowserRouter>

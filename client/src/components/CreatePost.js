@@ -16,7 +16,7 @@ function CreatePost({pageId, posts, setPosts}) {
         .then((res)=>{
           if (res.ok){
             res.json().then((post)=>{
-                setPosts([post, ...posts])
+                setPosts([...posts, post])
             });
           }else{
             res.json().then((err)=>console.log(err))

@@ -12,11 +12,9 @@ function WorldSpace({user}) {
                 r.json().then((pages) => setPages(pages));
             } else { console.log(r) }
         });
-    }, [])
+    }, [page])
 
     if (page) return <DisplayPage user={user} page={page} setPage={()=>setPage(null)}/>;
-
-    console.log(page)
 
     return (
         <div>

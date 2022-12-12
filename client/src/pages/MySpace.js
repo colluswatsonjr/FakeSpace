@@ -5,8 +5,6 @@ import EditUserForm from "../components/EditUserForm";
 
 function MySpace({ user, setUser }) {
 
-    console.log(user)
-
     const [isEditing, setIsEditing] = useState(false);
 
     function handleLogout() {
@@ -44,7 +42,7 @@ function MySpace({ user, setUser }) {
                     <button onClick={handleDelete}>DEACTIVATE ACCOUNT</button>
                 </div>
             }
-            <DisplayPosts posts={user.posts} />
+            <DisplayPosts userId={user.id} posts={user.posts} />
         </div>
     )
 }

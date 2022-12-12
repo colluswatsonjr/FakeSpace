@@ -7,9 +7,7 @@ function EditUserForm({ user, setUser, setEditing }) {
 
     function handleEditSubmit(e) {
         e.preventDefault()
-        setUser(editForm)
-        setEditForm({ username: '', first_name: '', last_name: '', password: '', passwordConfirmation: '' })
-        setEditing(false)
+
         fetch(`users/${user.id}`, {
             method: "PATCH",
             headers: {
@@ -22,6 +20,8 @@ function EditUserForm({ user, setUser, setEditing }) {
             .then((r) => r.json())
             .then((data) => setUser(data))
             .catch((err) => console.log(err))
+            setEditForm({ username: '', first_name: '', last_name: '', password: '', passwordConfirmation: '' })
+            setEditing(false)
     }
     return (
         <form>

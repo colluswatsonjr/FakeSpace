@@ -22,6 +22,7 @@ function CreatePost({pageId, posts, setPosts}) {
             res.json().then((err)=>console.log(err))
           }
         })
+        setForm({ page_id: pageId, text: '' })
       }
 
     return (

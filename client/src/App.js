@@ -11,6 +11,8 @@ import CreateSpace from "./pages/CreateSpace";
 
 function App() {
   const [user, setUser] = useState(null)
+  const [page, setPage] = useState(null)
+
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -28,8 +30,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<WorldSpace user={user} />} />
-          <Route path="/create" element={<CreateSpace user={user}/>} />
+          <Route path="/" element={<WorldSpace user={user} page={page} setPage={setPage}/>} />
+          <Route path="/create" element={<CreateSpace user={user} page={page} setPage={setPage}/>} />
           <Route path="/user" element={<MySpace user={user} setUser={setUser} />} />
         </Routes>
       </BrowserRouter>

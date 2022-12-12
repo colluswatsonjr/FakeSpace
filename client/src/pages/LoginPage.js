@@ -5,7 +5,7 @@ import LoginForm from "../components/LoginForm";
 
 function LoginPage({ onLogin, setUser }) {
 
-    const [showLogin, setShowLogin] = useState(false);
+    const [showLogin, setShowLogin] = useState(true);
 
     return (
         <div>

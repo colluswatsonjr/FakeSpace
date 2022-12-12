@@ -1,12 +1,15 @@
 import { useState } from "react"
+import DisplayPage from "../components/DisplayPage"
 
-function CreateSpace({ user }) {
+function CreateSpace({ user, page, setPage }) {
 
     const [form, setForm] = useState({ title: '', bio: '' })
+    const [newPage, setNewPage] = useState(null)
     
     function handleSubmit(e) {
         e.preventDefault()
         console.log(form)
+        
 
         fetch("/pages", {
             method: "POST",
@@ -17,14 +20,15 @@ function CreateSpace({ user }) {
         })
             .then((res) => {
                 if (res.ok) {
-                    res.json().then((page) => console.log(page));
+                    res.json().then((page) => setNewPage(page));
                 } else {
                     res.json().then((err) => console.log(err))
                 }
         })
+        setForm({ title: '', bio: '' })
     }
     // console.log(page)
-    // if (page) return <DisplayPage user={user} page={page} />;
+    if (newPage) return <DisplayPage user={user} page={newPage} setPage={() => setNewPage(null)}/>;
 
     return (
         <div>

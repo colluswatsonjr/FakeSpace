@@ -5,7 +5,6 @@ class UsersController < ApplicationController
     end
 
     def show
-        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         user = User.find(session[:user_id])
         render json: user
     end
@@ -21,7 +20,6 @@ class UsersController < ApplicationController
     end
 
     def update
-        return render json: { errors: ["Not authorized" ]}, status: :unauthorized unless session.include? :user_id
         user = User.find_by(id:params[:id])
         if user
           user.update(user_params)
@@ -32,7 +30,6 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        return render json: { errors: ["Not authorized" ]}, status: :unauthorized unless session.include? :user_id
         user = User.find_by(id:params[:id])
         if user
             user.destroy

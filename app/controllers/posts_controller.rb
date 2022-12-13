@@ -14,7 +14,6 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        return render json: { errors: ["Not authorized" ]}, status: :unauthorized unless session.include? :user_id
         post = Post.find_by(id:params[:id])
         if post
             post.destroy

@@ -5,11 +5,12 @@ function CreateSpace({ user, page, setPage }) {
 
     const [form, setForm] = useState({ title: '', bio: '' })
     const [newPage, setNewPage] = useState(null)
-    
+
+    //after request returns page, return or navigate to /page/id
+    //create show route for page to get page to display
+
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(form)
-        
 
         fetch("/pages", {
             method: "POST",
@@ -27,7 +28,6 @@ function CreateSpace({ user, page, setPage }) {
         })
         setForm({ title: '', bio: '' })
     }
-    // console.log(page)
     if (newPage) return <DisplayPage user={user} page={newPage} setPage={() => setNewPage(null)}/>;
 
     return (

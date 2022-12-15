@@ -3,6 +3,14 @@ class PagesController < ApplicationController
         pages = Page.all
         render json: pages
     end
+    def show
+        page = Page.find_by(params[:id])
+        if page.valid?
+            render json: page, status: :created
+        else
+            render json: { errors: page.errors.full_messages }, status: :unprocessable_entity
+        end
+    end
     def create
         page = Page.create(title:params[:title], bio:params[:bio])
         if page.valid?

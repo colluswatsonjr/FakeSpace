@@ -21,6 +21,14 @@ function WorldSpace({ user, page, setPage }) {
             } else { console.log(r) }
         });
     }
+    function getPage(id){
+        fetch(`/pages/${id}`)
+        .then((r) => {
+            if (r.ok) {
+                r.json().then((page) => setPage(page));
+            } else { console.log(r) }
+        });
+    }
 
     if (page) return <DisplayPage user={user} page={page} setPage={() => setPage(null)} />;
 
@@ -34,7 +42,8 @@ function WorldSpace({ user, page, setPage }) {
             </div>
             {pages.map((page) => {
                 return (
-                    <div key={page.id} onClick={() => setPage(page)}>
+                    // <div key={page.id} onClick={() => setPage(page)}>
+                    <div key={page.id} onClick={() => getPage(page.id)}>
                         <h4>{page.title}</h4>
                         <p>{page.bio}</p>
                     </div>

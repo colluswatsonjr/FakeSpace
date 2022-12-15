@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :pages
   resources :users
 
-  get  "/pages", to: 'pages#show'
+  get  "/pages/:id", to: 'pages#show'
   
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

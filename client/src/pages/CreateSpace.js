@@ -1,13 +1,10 @@
 import { useState } from "react"
 import DisplayPage from "../components/DisplayPage"
 
-function CreateSpace({ user, page, setPage }) {
+function CreateSpace({ user }) {
 
     const [form, setForm] = useState({ title: '', bio: '' })
     const [newPage, setNewPage] = useState(null)
-
-    //after request returns page, return or navigate to /page/id
-    //create show route for page to get page to display
 
     function handleSubmit(e) {
         e.preventDefault()

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DisplayPosts from "../components/DisplayPosts";
 import EditUserForm from "../components/EditUserForm";
 
@@ -6,6 +6,15 @@ import EditUserForm from "../components/EditUserForm";
 function MySpace({ user, setUser }) {
 
     const [isEditing, setIsEditing] = useState(false);
+    const [myPosts, setMyPosts] = useState([])
+
+    useEffect((user) => {
+        fetch(`/posts/${user.id}`)
+          .then((r) => r.json())
+          .then(setMyPosts);
+      }, []);
+
+    console.log(myPosts)
 
     function handleLogout() {
         console.log('logout')
@@ -24,6 +33,17 @@ function MySpace({ user, setUser }) {
             }
         });
     }
+    // function getPosts(){
+    //     fetch(`/posts/${user.id}`)
+    //     .then((r) => {
+    //         if (r.ok) {
+    //             r.json().then((posts) => setMyPosts(posts));
+    //         } else { console.log(r) }
+    //     });
+    //     return(
+    //         <div>Hello</div>
+    //     )
+    // }
 
     return (
         <div>
@@ -42,7 +62,9 @@ function MySpace({ user, setUser }) {
                     <button onClick={handleDelete}>DEACTIVATE ACCOUNT</button>
                 </div>
             }
-            <DisplayPosts userId={user.id} posts={user.posts} />
+            {/* <DisplayPosts userId={user.id} posts={myPosts} /> */}
+            {/* <div>{()=>getPosts()}</div> */}
+            
         </div>
     )
 }

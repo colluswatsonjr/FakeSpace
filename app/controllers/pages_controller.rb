@@ -4,7 +4,7 @@ class PagesController < ApplicationController
         render json: pages
     end
     def show
-        page = Page.find_by(params[:id])
+        page = Page.find_by(id: params[:id])
         if page.valid?
             render json: page, status: :created
         else

@@ -4,6 +4,7 @@ import DisplayPage from "../components/DisplayPage";
 
 function WorldSpace({ user, page, setPage }) {
     const [pages, setPages] = useState([])
+    // const [search, setSearch] = useState('')
 
     useEffect(() => {
         fetch("/pages").then((r) => {
@@ -12,6 +13,7 @@ function WorldSpace({ user, page, setPage }) {
             } else { console.log(r) }
         });
     }, [page])
+    
     function getPage(id){
         fetch(`/pages/${id}`)
         .then((r) => {
@@ -22,11 +24,11 @@ function WorldSpace({ user, page, setPage }) {
     }
 
     if (page) return <DisplayPage user={user} page={page} setPage={() => setPage(null)} />;
+
+    // console.log(search)
     return (
-        
         <div>
             <h2>WorldSpace</h2>
-            <br/>
             {pages.map((page) => {
                 return (
                     <div key={page.id} onClick={() => getPage(page.id)}>

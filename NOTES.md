@@ -13,3 +13,8 @@
     - sign up with a new user account
     - log in to the site with a secure password and stay logged in via user ID in the session hash
     - log out of the site.
+
+Display Error messages on screen
+Style !!!
+Refactor user get requests
+User user posts and page to fill content

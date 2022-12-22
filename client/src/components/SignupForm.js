@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-function SignupForm({setUser}) {
-
+function SignupForm({ setUser }) {
+  const [error, setError] = useState(null)
   const [form, setForm] = useState({ username: '', first_name: '', last_name: '', password: '', password_confirmation: '' })
 
   function handleSubmit(e) {
@@ -14,21 +14,21 @@ function SignupForm({setUser}) {
       },
       body: JSON.stringify(form)
     })
-    .then((res)=>{
-      if (res.ok){
-        res.json().then((user)=>{
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((user) => {
             setUser(user)
-        });
-      }else{
-        res.json().then((err)=>console.log(err))
-      }
-    })
+          });
+        } else {
+          res.json().then((err) => setError(err))
+        }
+      })
   }
 
 
   return (
     <>
-      <h1>Signup ...</h1>
+      {error ? <h1>{`${error.errors}`}</h1> : <h1>hello, signup here...</h1>}
       <form onSubmit={handleSubmit}>
 
         <label>Username:</label><br />

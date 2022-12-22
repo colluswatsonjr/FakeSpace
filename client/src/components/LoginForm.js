@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 function LoginForm({setUser}) {
+    const [error, setError] = useState('')
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
   
@@ -21,14 +22,15 @@ function LoginForm({setUser}) {
         if (res.ok){
           res.json().then((user)=>setUser(user));
         }else{
-          res.json().then((err)=>console.log(err))
+          res.json().then((err)=>setError(err))
         }
       })
     }
+    console.log(error)
 
     return (
         <>
-            <h1>Login ...</h1>
+      {error ? <h1>{`${error.errors}`}</h1> : <h1>welcome back, login here...</h1>}
             <form onSubmit={handleSubmit}>
                 <label>Username:</label>
                 <input

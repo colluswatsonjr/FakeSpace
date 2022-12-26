@@ -23,9 +23,15 @@ Use a Rails API backend with a React frontend.
     - Delete users personally created posts
 
 ## Setup
-- Fork and clone this https://github.com/colluswatsonjr/FakeSpace
-- Run rails db:migrate db:seed
-- Run rails server
-- Cd to /client
-- Run npm install
-- Run npm start
+Fork and clone this https://github.com/colluswatsonjr/ruby-phase-3-server
+
+Run bundle exec rake db:migrate db:seed
+
+Run bundle exec rake server
+
+## Frontend
+Fork and clone frontend https://github.com/colluswatsonjr/ruby-phase-3-client
+
+Run npm install
+
+Run npm start

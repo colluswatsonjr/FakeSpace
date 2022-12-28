@@ -22,9 +22,6 @@ function App() {
     });
   }, [])
 
-  console.log(user)
-
-
   if (!user) return <LoginPage setUser={setUser} />;
 
   return (
@@ -35,7 +32,6 @@ function App() {
         <Routes>
           <Route path="/" element={<WorldSpace user={user} page={page} setPage={setPage}/>} />
           <Route path="/create" element={<CreateSpace user={user} page={page} setPage={setPage}/>} />
-          {/* <Route path="/user" element={<MySpace user={user} setUser={setUser} />} /> */}
           <Route path="/user" element={<MySpace user={user} setUser={setUser} />} />
         </Routes>
       </BrowserRouter>

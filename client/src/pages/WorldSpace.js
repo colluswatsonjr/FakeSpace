@@ -4,7 +4,6 @@ import DisplayPage from "../components/DisplayPage";
 
 function WorldSpace({ user, page, setPage }) {
     const [pages, setPages] = useState([])
-    // const [search, setSearch] = useState('')
 
     useEffect(() => {
         fetch("/pages").then((r) => {
@@ -25,7 +24,6 @@ function WorldSpace({ user, page, setPage }) {
 
     if (page) return <DisplayPage user={user} page={page} setPage={() => setPage(null)} />;
 
-    // console.log(search)
     return (
         <div>
             <h2>WorldSpace</h2>

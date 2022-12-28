@@ -22,6 +22,7 @@ function App() {
     });
   }, [])
 
+
   if (!user) return <LoginPage setUser={setUser} />;
 
   return (

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 - Use a Rails API backend with a React frontend.
 
 - Have at least three models on the backend, that include the following:
@@ -18,3 +19,5 @@ Display Error messages on screen
 Style !!!
 Refactor user get requests
 User user posts and page to fill content
+=======
+>>>>>>> parent of c91d613 ('update notes and readme')

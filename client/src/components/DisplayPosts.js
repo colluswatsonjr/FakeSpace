@@ -36,10 +36,14 @@ function DisplayPosts({ user, page, setPosts, posts }) {
     return (
         <div>
             <h3>Posts</h3>
-            <form>
-                <input type='text' placeholder="add post..." value={form.text} onChange={(e) => { setForm({ ...form, text: e.target.value }) }} />
-                <button onClick={(e) => handleSubmit(e)}>Submit</button>
-            </form>
+            {page ?
+                <form>
+                    <input type='text' placeholder="add post..." value={form.text} onChange={(e) => { setForm({ ...form, text: e.target.value }) }} />
+                    <button onClick={(e) => handleSubmit(e)}>Submit</button>
+                </form>
+                :
+                null
+            }
             {posts.map((post) => {
                 return (
                     <div key={post.id}>

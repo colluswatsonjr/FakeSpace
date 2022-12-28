@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DisplayPosts from "../components/DisplayPosts";
 import EditUserForm from "../components/EditUserForm";
 
@@ -31,7 +31,6 @@ function MySpace({ user, setUser }) {
             }
         });
     }
-    console.log('myspace',user)
 
     return (
         <div>
@@ -50,7 +49,7 @@ function MySpace({ user, setUser }) {
                     <button onClick={handleDelete}>DEACTIVATE ACCOUNT</button>
                 </div>
             }
-            <DisplayPosts userId={user.id} posts={posts} />
+            <DisplayPosts user={user} setPosts={setPosts} posts={posts} />
 
         </div>
     )

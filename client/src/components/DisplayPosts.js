@@ -1,6 +1,26 @@
+import { useState } from "react";
 
 
-function DisplayPosts({ userId, setPosts, posts }) {
+function DisplayPosts({ user, page, setPosts, posts }) {
+
+    const [form, setForm] = useState({ text: '' })
+
+    function handleSubmit(e) {
+        e.preventDefault()
+
+        fetch("/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ page_id: page.id, ...form })
+        })
+            .then(r => r.json())
+            .then(post => setPosts([...posts, post]))
+            .catch(err => console.log(err))
+
+        setForm({ text: '' })
+    }
 
     function handleDelete(id) {
         fetch(`/posts/${id}`, {
@@ -13,20 +33,18 @@ function DisplayPosts({ userId, setPosts, posts }) {
         });
     }
 
-    function DisplayDeleteBtn(post) {
-        if (post.username === userId) {
-            return <button onClick={() => handleDelete(post.id)}>x</button>
-        } 
-    }
-
     return (
         <div>
             <h3>Posts</h3>
+            <form>
+                <input type='text' placeholder="add post..." value={form.text} onChange={(e) => { setForm({ ...form, text: e.target.value }) }} />
+                <button onClick={(e) => handleSubmit(e)}>Submit</button>
+            </form>
             {posts.map((post) => {
                 return (
                     <div key={post.id}>
                         {post.text + ' // ' + post.username}
-                        {DisplayDeleteBtn(post)}
+                        {post.username === user.username ? <button onClick={() => handleDelete(post.id)}>x</button> : null}
                     </div>
                 )
             })}

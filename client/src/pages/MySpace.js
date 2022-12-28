@@ -6,13 +6,13 @@ import EditUserForm from "../components/EditUserForm";
 function MySpace({ user, setUser }) {
 
     const [isEditing, setIsEditing] = useState(false);
-    const [myPosts, setMyPosts] = useState([])
+    const [posts, setPosts] = useState(user.posts)
 
-    useEffect(() => {
-        fetch(`/posts/${user.id}`)
-            .then((r) => r.json())
-            .then(setMyPosts);
-    }, [user]);
+    // useEffect(() => {
+    //     fetch(`/posts/${user.id}`)
+    //         .then((r) => r.json())
+    //         .then(setMyPosts);
+    // }, [user]);
 
     function handleLogout() {
         console.log('logout')
@@ -31,6 +31,7 @@ function MySpace({ user, setUser }) {
             }
         });
     }
+    console.log('myspace',user)
 
     return (
         <div>
@@ -49,7 +50,7 @@ function MySpace({ user, setUser }) {
                     <button onClick={handleDelete}>DEACTIVATE ACCOUNT</button>
                 </div>
             }
-            <DisplayPosts userId={user.id} posts={myPosts} />
+            <DisplayPosts userId={user.id} posts={posts} />
 
         </div>
     )

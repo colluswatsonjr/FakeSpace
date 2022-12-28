@@ -18,15 +18,10 @@ function DisplayPage({ user, page, setPage }) {
             },
             body: JSON.stringify(form)
         })
-            .then((res) => {
-                if (res.ok) {
-                    res.json().then((post) => {
-                        setPosts([...posts, post])
-                    });
-                } else {
-                    res.json().then((err) => console.log(err))
-                }
-            })
+        .then(r=>r.json())
+        .then(post=>setPosts([...posts, post]))
+        .catch(err=>console.log(err))
+
         setForm({ page_id: page.id, text: '' })
     }
 

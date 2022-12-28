@@ -31,7 +31,7 @@ function App() {
     <div className="App">
       <h1>FakeSpace</h1>
       <BrowserRouter>
-        <Navbar />
+        <Navbar setPage={setPage}/>
         <Routes>
           <Route path="/" element={<WorldSpace user={user} page={page} setPage={setPage}/>} />
           <Route path="/create" element={<CreateSpace user={user} page={page} setPage={setPage}/>} />

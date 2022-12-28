@@ -1,5 +1,5 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :username, :pagename, :text
+  attributes :id, :user_id , :username, :pagename, :text
   def username
     "#{self.object.user.username}"
   end

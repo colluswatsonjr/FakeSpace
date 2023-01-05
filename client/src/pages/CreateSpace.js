@@ -1,3 +1,4 @@
+import { Box, Button, TextField } from "@mui/material"
 import { useState } from "react"
 import DisplayPage from "../components/DisplayPage"
 
@@ -22,33 +23,33 @@ function CreateSpace({ user }) {
                 } else {
                     res.json().then((err) => console.log(err))
                 }
-        })
+            })
         setForm({ title: '', bio: '' })
     }
-    if (newPage) return <DisplayPage user={user} page={newPage} setPage={() => setNewPage(null)}/>;
+    if (newPage) return <DisplayPage user={user} page={newPage} setPage={() => setNewPage(null)} />;
 
     return (
-        <div>
-            <h2>CreateSpace</h2>
-            <label>Title:</label><br />
-            <input
-                type="text"
+        <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <TextField
+                required
                 id="title"
-                onChange={(e) => { setForm({ ...form, title: e.target.value }) }}
+                variant="outlined"
+                label="Title..."
+                // sx={{ bgcolor: 'beige' }}
                 value={form.title}
-            />&nbsp;<br />
-
-            <label>Bio:</label><br />
-            <textarea
-                rows='10'
-                cols='20'
+                onChange={(e) => { setForm({ ...form, title: e.target.value }) }}
+            />
+            <TextField
+                required
                 id="bio"
-                onChange={(e) => { setForm({ ...form, bio: e.target.value }) }}
+                variant="outlined"
+                label="Bio..."
+                // sx={{ bgcolor: 'beige' }}
                 value={form.bio}
-            />&nbsp;<br />
-            <button onClick={(e) => handleSubmit(e)}>Create Space</button>
-
-        </div>
+                onChange={(e) => { setForm({ ...form, bio: e.target.value }) }}
+            />
+            <Button variant="contained" onClick={(e) => handleSubmit(e)}>Create Space</Button>
+        </Box>
     )
 }
 

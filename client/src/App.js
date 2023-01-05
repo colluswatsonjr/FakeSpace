@@ -7,9 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import WorldSpace from "./pages/WorldSpace";
 import CreateSpace from "./pages/CreateSpace";
 
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { CssBaseline } from "@mui/material";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -21,25 +19,23 @@ function App() {
         r.json().then((user) => {
           setUser(user)
         });
-      } else { console.log(r) }
+      }
     });
   }, [])
 
   if (!user) return <LoginPage setUser={setUser} />;
 
   return (
-    <>
-      <Container className="App">
-        <BrowserRouter>
-          <Navbar setPage={setPage} setUser={setUser} />
-          <Routes>
-            <Route path="/" element={<WorldSpace user={user} page={page} setPage={setPage} />} />
-            <Route path="/create" element={<CreateSpace user={user} page={page} setPage={setPage} />} />
-            <Route path="/user" element={<MySpace user={user} setUser={setUser} />} />
-          </Routes>
-        </BrowserRouter>
-      </Container>
-    </>
+    <Container maxWidth="lg" sx={{ textAlign:'center'}}>
+      <BrowserRouter>
+        <Navbar setPage={setPage} setUser={setUser} />
+        <Routes>
+          <Route path="/" element={<WorldSpace user={user} page={page} setPage={setPage} />} />
+          <Route path="/create" element={<CreateSpace user={user} page={page} setPage={setPage} />} />
+          <Route path="/user" element={<MySpace user={user} setUser={setUser} />} />
+        </Routes>
+      </BrowserRouter>
+    </Container>
   );
 }
 

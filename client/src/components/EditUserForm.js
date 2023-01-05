@@ -20,7 +20,7 @@ function EditUserForm({ user, setUser, setEditing }) {
             .then((r) => r.json())
             .then((data) => setUser(data))
             .catch((err) => console.log(err))
-            setEditForm({ username: '', first_name: '', last_name: '', password: '', passwordConfirmation: '' })
+            setEditForm({ username: '', first_name: '', last_name: '', password: '', password_confirmation: '' })
             setEditing(false)
     }
     return (

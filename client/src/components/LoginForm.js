@@ -1,3 +1,4 @@
+import { Box, Button, Container, CssBaseline, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 function LoginForm({ setUser }) {
@@ -18,35 +19,58 @@ function LoginForm({ setUser }) {
         password,
       })
     })
-    .then(r=>r.json())
-    .then(user=>setUser(user))
-    .catch(err=>setError(err))
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((user) => setUser(user));
+        } else {
+          res.json().then((err) => setError(err))
+        }
+      })
+      .catch(err => setError(err))
   }
 
   return (
-    <>
-      {error ? <h1>{`${error.errors}`}</h1> : <h1>welcome back, login here...</h1>}
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
-          id="username"
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-        />&nbsp;<br />
+    <Container component="main" maxWidth="lg">
+      <CssBaseline />
+      <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {error ? <h1>{`${error.errors}`}</h1> : <Typography component="h1" variant="h5">Sign in...</Typography>}
+        {/* <Typography component="h1" variant="h5">Sign in...</Typography> */}
+        <form onSubmit={handleSubmit}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <br />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Login
+          </Button>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          id="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />&nbsp;
 
-        <button type="submit">LOGIN</button>
-
-      </form>
-    </>
+        </form>
+      </Box>
+    </Container>
   )
 
 }

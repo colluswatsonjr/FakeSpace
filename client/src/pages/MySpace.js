@@ -1,3 +1,4 @@
+import { Avatar, Box, Button, Card, CardHeader, Grid, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import DisplayPosts from "../components/DisplayPosts";
 import EditUserForm from "../components/EditUserForm";
@@ -6,7 +7,7 @@ import EditUserForm from "../components/EditUserForm";
 function MySpace({ user, setUser }) {
 
     const [isEditing, setIsEditing] = useState(false);
-    const [posts, setPosts] = useState(user.posts)
+    const [posts, setPosts] = useState([])
 
     useEffect(() => {
         fetch(`/posts/${user.id}`)
@@ -14,14 +15,7 @@ function MySpace({ user, setUser }) {
             .then(setPosts);
     }, [user]);
 
-    function handleLogout() {
-        console.log('logout')
-        fetch("/logout", { method: "DELETE" }).then((r) => {
-            if (r.ok) {
-                setUser(null)
-            }
-        });
-    }
+
     function handleDelete() {
         fetch(`/users/${user.id}`, {
             method: "DELETE",
@@ -33,25 +27,28 @@ function MySpace({ user, setUser }) {
     }
 
     return (
-        <div>
-            <h2>MySpace</h2>
+        <Box sx={{ padding: '5%' }}>
             {isEditing ?
                 <div>
                     <EditUserForm user={user} setUser={setUser} setEditing={setIsEditing} />
                     <button onClick={() => setIsEditing(false)}>CANCEL</button>
                 </div>
                 :
-                <div>
-                    <h3>{user.username}</h3>
-                    <p>{user.first_name + ' ' + user.last_name}</p>
-                    <button onClick={() => setIsEditing(true)}>UPDATE</button>
-                    <button onClick={() => handleLogout()}>LOGOUT</button>
-                    <button onClick={handleDelete}>DEACTIVATE ACCOUNT</button>
-                </div>
+                <Card sx={{ padding: '5%', textAlign:'center' }}>
+                    <CardHeader
+                        avatar={<Avatar sx={{ bgcolor: 'black', color:'white' }} aria-label="recipe"></Avatar>}
+                        action={<IconButton aria-label="settings"></IconButton>}
+                        title={`${user.username}`}
+                        subheader={`${user.first_name} ${user.last_name}`}
+                    />
+                    <Button variant="contained" onClick={() => setIsEditing(true)}>UPDATE</Button>
+                    <Button variant="contained" onClick={handleDelete}>DELETE</Button>
+                </Card>
             }
-            <DisplayPosts user={user} setPosts={setPosts} posts={posts} />
-
-        </div>
+            <Grid container spacing={2} sx={{ padding: '5%' }}>
+                <DisplayPosts user={user} setPosts={setPosts} posts={posts} />
+            </Grid>
+        </Box>
     )
 }
 

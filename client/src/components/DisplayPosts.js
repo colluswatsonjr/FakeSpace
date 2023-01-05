@@ -1,3 +1,4 @@
+import { Button, Card, CardContent, Grid, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 
@@ -34,25 +35,29 @@ function DisplayPosts({ user, page, setPosts, posts }) {
     }
 
     return (
-        <div>
-            <h3>Posts</h3>
+        <Grid container spacing={2}>
             {page ?
-                <form>
-                    <input type='text' placeholder="add post..." value={form.text} onChange={(e) => { setForm({ ...form, text: e.target.value }) }} />
-                    <button onClick={(e) => handleSubmit(e)}>Submit</button>
-                </form>
+                <Grid item xs={12}>
+                    <TextField fullWidth rows={2} id="outlined-basic" label="Add Post..." variant="filled" value={form.text} onChange={(e) => { setForm({ ...form, text: e.target.value }) }}/>
+                    <Button variant="contained" onClick={(e) => handleSubmit(e)}>Submit</Button>
+                </Grid>
                 :
                 null
             }
             {posts.map((post) => {
                 return (
-                    <div key={post.id}>
-                        {post.text + ' // ' + post.username}
-                        {post.username === user.username ? <button onClick={() => handleDelete(post.id)}>x</button> : null}
-                    </div>
+                    <Grid item xs={12} md={6} key={post.id}>
+                        <Card  sx={{}}>
+                            <CardContent>
+                                <Typography>{post.text + ' // ' + post.username}</Typography>
+                                <Typography></Typography>
+                            </CardContent>
+                                {post.username === user.username ? <Button variant="contained" onClick={() => handleDelete(post.id)}>x</Button> : null}
+                        </Card>
+                    </Grid>
                 )
             })}
-        </div>
+        </Grid>
     )
 }
 

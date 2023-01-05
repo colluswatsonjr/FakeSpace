@@ -1,7 +1,9 @@
+import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useState } from "react";
 
-function SignupForm({setUser}) {
-
+function SignupForm({ setUser }) {
+  const [error, setError] = useState('')
   const [form, setForm] = useState({ username: '', first_name: '', last_name: '', password: '', password_confirmation: '' })
 
   function handleSubmit(e) {
@@ -14,69 +16,95 @@ function SignupForm({setUser}) {
       },
       body: JSON.stringify(form)
     })
-    .then((res)=>{
-      if (res.ok){
-        res.json().then((user)=>{
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((user) => {
             setUser(user)
-        });
-      }else{
-        res.json().then((err)=>console.log(err))
-      }
-    })
+          });
+        } else {
+          res.json().then((err) => setError(err))
+        }
+      })
   }
 
 
   return (
-    <>
-      <h1>Signup ...</h1>
-      <form onSubmit={handleSubmit}>
+    <Container component="main" maxWidth="xs">
+      <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {error ? <h1>{`${error.errors}`}</h1> : <Typography component="h1" variant="h5">Sign up</Typography>}
 
-        <label>Username:</label><br />
-        <input
-          type="text"
-          id="username"
-          onChange={(e) => { setForm({ ...form, username: e.target.value }) }}
-          value={form.username}
-        />&nbsp;<br />
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+          <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="username"
+                label="Username:"
+                autoFocus
+                value={form.username}
+                onChange={(e) => { setForm({ ...form, username: e.target.value }) }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                fullWidth
+                id="first_name"
+                label="First Name:"
+                value={form.first_name}
+                onChange={(e) => { setForm({ ...form, first_name: e.target.value }) }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                fullWidth
+                id="last_name"
+                label="Last Name:"
+                value={form.last_name}
+                onChange={(e) => { setForm({ ...form, last_name: e.target.value }) }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+                value={form.password}
+                onChange={(e) => { setForm({ ...form, password: e.target.value }) }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="passwordConfirmation"
+                autoComplete="new-password"
+                value={form.password_confirmation}
+                onChange={(e) => { setForm({ ...form, password_confirmation: e.target.value }) }}
+              />
+            </Grid>
 
-        <label>First Name:</label><br />
-        <input
-          type="text"
-          id="first_name"
-          onChange={(e) => { setForm({ ...form, first_name: e.target.value }) }}
-          value={form.first_name}
-        />&nbsp;<br />
-
-        <label>Last Name:</label><br />
-        <input
-          type="text"
-          id="last_name"
-          onChange={(e) => { setForm({ ...form, last_name: e.target.value }) }}
-          value={form.last_name}
-        />&nbsp;<br />
-
-        <label>Password:</label><br />
-        <input
-          type="password"
-          id="password"
-          onChange={(e) => { setForm({ ...form, password: e.target.value }) }}
-          value={form.password}
-        />&nbsp;<br />
-
-        <label>Password Confirmation:</label><br />
-        <input
-          type="password"
-          id="passwordConfirmation"
-          onChange={(e) => { setForm({ ...form, password_confirmation: e.target.value }) }}
-          value={form.password_confirmation}
-        />&nbsp;<br />
-
-        <button type="submit">SIGN UP</button>
-
-
-      </form>
-
-    </>
+          </Grid>
+          <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+        </form>
+      </Box>
+    </Container>
   );
 }
 

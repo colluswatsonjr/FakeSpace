@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :users
 
   get "/pages/:id", to: 'pages#show'
+  get '/search', to: 'pages#search'
+
 
   get "/posts/:user", to: 'posts#show'
 

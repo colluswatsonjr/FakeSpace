@@ -1,17 +1,17 @@
 class PostsController < ApplicationController
     def index
-        posts = Post.all
+        posts = Post.all.where(user_id: session[:user_id])
         render json: posts
     end
 
-    def show
-        posts = Post.where(user_id: params[:id])
-        if posts
-            render json: posts, status: :created
-        else
-            render json: { errors: posts.errors.full_messages }, status: :unprocessable_entity
-        end
-    end
+    # def show
+    #     posts = Post.where(user_id: params[:id])
+    #     if posts
+    #         render json: posts, status: :created
+    #     else
+    #         render json: { errors: posts.errors.full_messages }, status: :unprocessable_entity
+    #     end
+    # end
 
     def create
         post = Post.create(page_id:params[:page_id], user_id:session[:user_id], text:params[:text])

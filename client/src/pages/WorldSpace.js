@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 
 import DisplayPage from "../components/DisplayPage";
 
-function WorldSpace({ user, page, setPage }) {
+function WorldSpace({ user }) {
+
     const [pages, setPages] = useState([])
+    const [page, setPage] = useState(null)
     const [search, setSearch] = useState([])
 
     useEffect(() => {
@@ -15,14 +17,14 @@ function WorldSpace({ user, page, setPage }) {
         });
     }, [])
 
-    function getPage(id) {
-        fetch(`/pages/${id}`)
-            .then((r) => {
-                if (r.ok) {
-                    r.json().then((page) => setPage(page));
-                } else { console.log(r) }
-            });
-    }
+    // function getPage(id) {
+    //     fetch(`/pages/${id}`)
+    //         .then((r) => {
+    //             if (r.ok) {
+    //                 r.json().then((page) => setPage(page));
+    //             } else { console.log(r) }
+    //         });
+    // }
 
     function handleSearch(e) {
         e.preventDefault()
@@ -33,8 +35,9 @@ function WorldSpace({ user, page, setPage }) {
                 } else { console.log(r) }
             });
     }
-
     if (page) return <DisplayPage user={user} page={page} setPage={() => setPage(null)} />;
+
+    // if (page) return <DisplayPage user={user} page={page} setPage={() => setPage(null)} />;
 
     return (
         <>
@@ -47,7 +50,7 @@ function WorldSpace({ user, page, setPage }) {
                 <br />
                 {pages.map((page) => {
                     return (
-                        <Grid item xs={12} md={6} key={page.id} onClick={() => getPage(page.id)}>
+                        <Grid item xs={12} md={6} key={page.id} onClick={() => setPage(page)}>
                             <Card sx={{ padding: '5%', textAlign: 'center' }}>
                                 <h4>{page.title}</h4>
                                 <p>{page.bio}</p>

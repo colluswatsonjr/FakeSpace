@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   get "/pages/:id", to: 'pages#show'
   get '/search', to: 'pages#search'
 
-
-  get "/posts/:user", to: 'posts#show'
+  # get "/posts/:user", to: 'posts#show'
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

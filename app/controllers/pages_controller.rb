@@ -21,13 +21,6 @@ class PagesController < ApplicationController
     end
 
     def search
-        # pages = Page.all.map(page=>page)
-        # if pages.valid?
-        #     render json: pages, status: :created
-        #  else
-        #     render json: { errors: page.errors.full_messages }, status: :unprocessable_entity
-        # end
-        # pages = Page.all.find_by()
         pages = Page.where("title LIKE ?", "%#{params[:search]}%")
         if pages
             render json: pages, status: :created

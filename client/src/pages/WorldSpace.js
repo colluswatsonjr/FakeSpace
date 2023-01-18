@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import ShowPage from "../components/ShowPage";
 
 function WorldSpace({ setUser, deleteUserPost }) {
-
+    //hold pages
     const [pages, setPages] = useState([])
     const [page, setPage] = useState(null)
     const [search, setSearch] = useState([])
-
+    // fetch all pages and set to pages state
     useEffect(() => {
         fetch("/pages").then((r) => {
             if (r.ok) {
@@ -26,7 +26,8 @@ function WorldSpace({ setUser, deleteUserPost }) {
                 } else { console.log(r) }
             });
     }
-
+    // takes post, send post to parent component, setPage to current page with posts adding passed in post
+    // for each page in pages, if title matches replace with updated page/posts, if not return page. set pages to new collection of pages
     function handleAddPost(post) {
         setUser(post)
         setPage({ ...page, posts: [...page.posts, post] })
@@ -43,6 +44,10 @@ function WorldSpace({ setUser, deleteUserPost }) {
 
         return setPages(updatePages)
     }
+
+    // take posts, and post id, send delted id to parent compo.
+    //set page to posts
+    // for each page in pages, if title matches replace with updated page/posts, if not return page. set pages to new collection of pages
 
     function handleUpdatePages(posts, id) {
         deleteUserPost(id)

@@ -10,8 +10,9 @@ import CreateSpace from "./pages/CreateSpace";
 import Container from '@mui/material/Container';
 
 function App() {
+  //set user to pass to componenets
   const [user, setUser] = useState(null)
-
+  // fetch logged in user and sets user state
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
@@ -21,12 +22,12 @@ function App() {
       }
     });
   }, [])
-
+ //takes id and filters through user posts removing it, and setting user to orignal user with new posts
   function handleDeleteUserPost(id){
     const deletePost = user.posts.filter((post)=>post.id !== id)
     setUser({...user, posts: deletePost})
   }
-
+  //if user not present show loginpage
   if (!user) return <LoginPage setUser={setUser} />;
 
   return (

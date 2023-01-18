@@ -3,7 +3,7 @@ import ShowPost from "./ShowPost"
 
 
 function ShowPosts({ posts, setPosts }) {
-
+    // fetch delete requst post, send new posts and send id to parent component
     function handleDeletePost(id) {
         fetch(`/posts/${id}`, {
             method: "DELETE",
@@ -11,8 +11,11 @@ function ShowPosts({ posts, setPosts }) {
             if (r.ok) {
                 const newPosts = posts.filter((post) => post.id !== id);
                 setPosts(newPosts, id)
+                console.log(r.success)
+            }else{
+                console.log(r)
             }
-        });
+        }).catch((e)=>console.log(e));
 
     }
 

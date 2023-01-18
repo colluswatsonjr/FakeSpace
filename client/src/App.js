@@ -11,30 +11,34 @@ import Container from '@mui/material/Container';
 
 function App() {
   const [user, setUser] = useState(null)
-  const [page, setPage] = useState(null)
-  const [posts, setPosts] = useState([])
 
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
           setUser(user)
-          setPosts(user.posts)
         });
       }
     });
   }, [])
+
+  function handleDeleteUserPost(id){
+    const deletePost = user.posts.filter((post)=>post.id !== id)
+    setUser({...user, posts: deletePost})
+  }
 
   if (!user) return <LoginPage setUser={setUser} />;
 
   return (
     <Container maxWidth="lg" sx={{ textAlign:'center'}}>
       <BrowserRouter>
-        <Navbar setPage={setPage} setUser={setUser} />
+        <Navbar setUser={setUser} />
         <Routes>
-          <Route path="/" element={<WorldSpace user={user} page={page} setPage={setPage} setPosts={(post)=>setPosts([...posts, post])} />} />
-          <Route path="/create" element={<CreateSpace user={user} page={page} setPage={setPage} />} />
-          <Route path="/user" element={<MySpace user={user} setUser={setUser} posts={posts} setPosts={setPosts} />} />
+          <Route path="/" element={<WorldSpace user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
+
+          <Route path="/create" element={<CreateSpace user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
+
+          <Route path="/user" element={<MySpace user={user} setUser={setUser} />} />
         </Routes>
       </BrowserRouter>
     </Container>
@@ -42,3 +46,6 @@ function App() {
 }
 
 export default App;
+
+
+// DELTE POST WHEN ON CREATE PAGE AND WORLD SPACE > PASS ID > FILTER BY ID >

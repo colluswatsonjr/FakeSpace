@@ -1,10 +1,11 @@
 import { Box, Button, TextField } from "@mui/material"
 import { useState } from "react"
-import DisplayPage from "../components/DisplayPage"
+import ShowPage from "../components/ShowPage"
 
-function CreateSpace({ user }) {
+function CreateSpace({ setUser, deleteUserPost }) {
 
     const [form, setForm] = useState({ title: '', bio: '' })
+
     const [newPage, setNewPage] = useState(null)
 
     function handleSubmit(e) {
@@ -26,30 +27,41 @@ function CreateSpace({ user }) {
             })
         setForm({ title: '', bio: '' })
     }
-    if (newPage) return <DisplayPage user={user} page={newPage} setPage={() => setNewPage(null)} />;
+
+    function handleAddPost(post) {
+        setNewPage({ ...newPage, posts: [...newPage.posts, post] })
+        setUser(post)
+    }
 
     return (
-        <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <TextField
-                required
-                id="title"
-                variant="outlined"
-                label="Title..."
-                // sx={{ bgcolor: 'beige' }}
-                value={form.title}
-                onChange={(e) => { setForm({ ...form, title: e.target.value }) }}
-            />
-            <TextField
-                required
-                id="bio"
-                variant="outlined"
-                label="Bio..."
-                // sx={{ bgcolor: 'beige' }}
-                value={form.bio}
-                onChange={(e) => { setForm({ ...form, bio: e.target.value }) }}
-            />
-            <Button variant="contained" onClick={(e) => handleSubmit(e)}>Create Space</Button>
-        </Box>
+        <>
+            {newPage ?
+                <ShowPage page={newPage} onAddPost={handleAddPost} setPosts={(posts, id)=>{
+                    deleteUserPost(id)
+                    setNewPage({...newPage, posts: posts})
+                }} setPage={setNewPage} />
+                :
+                <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <TextField
+                        required
+                        id="title"
+                        variant="outlined"
+                        label="Title..."
+                        value={form.title}
+                        onChange={(e) => { setForm({ ...form, title: e.target.value }) }}
+                    />
+                    <TextField
+                        required
+                        id="bio"
+                        variant="outlined"
+                        label="Bio..."
+                        value={form.bio}
+                        onChange={(e) => { setForm({ ...form, bio: e.target.value }) }}
+                    />
+                    <Button variant="contained" onClick={(e) => handleSubmit(e)}>Create Space</Button>
+                </Box>
+            }
+        </>
     )
 }
 

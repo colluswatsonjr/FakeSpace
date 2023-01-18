@@ -2,7 +2,7 @@ import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 
-function Navbar({ setPage, setUser }) {
+function Navbar({ setUser }) {
 
     function handleLogout() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
@@ -22,19 +22,19 @@ function Navbar({ setPage, setUser }) {
                     </Typography>
 
                     <Link to="/">
-                        <Button onClick={() => setPage(null)} sx={{ my: 2, color: 'black', display: 'block' }}>
+                        <Button sx={{ color:'black', display: 'block' }}>
                             world
                         </Button>
                     </Link>
 
                     <Link to="/create">
-                        <Button onClick={() => setPage(null)} sx={{ my: 2, color: 'black', display: 'block' }}>
+                        <Button sx={{ color:'black', display: 'block' }}>
                             create
                         </Button>
                     </Link>
 
                     <Link to="/user">
-                        <Button onClick={() => setPage(null)} sx={{ my: 2, color: 'black', display: 'block' }}>
+                        <Button sx={{ color:'black', display: 'block' }}>
                             home
                         </Button>
                     </Link>

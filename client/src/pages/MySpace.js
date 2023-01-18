@@ -1,27 +1,12 @@
-import { Avatar, Box, Button, Card, CardHeader, Grid, IconButton } from "@mui/material";
-import { useEffect, useState } from "react";
-import DisplayPosts from "../components/DisplayPosts";
+import { Box, Button, Card, CardHeader } from "@mui/material";
+import { useState } from "react";
 import EditUserForm from "../components/EditUserForm";
+import ShowPosts from "../components/ShowPosts";
 
 
-function MySpace({ user, setUser, posts, setPosts }) {
+function MySpace({ user, setUser}) {
 
     const [isEditing, setIsEditing] = useState(false);
-    // const [posts, setPosts] = useState([])
-    // const [myPosts, setMyPosts] = useState([])
-
-    // useEffect(() => {
-    //     fetch(`/posts/${user.id}`)
-    //         .then((r) => r.json())
-    //         .then(setPosts);
-    // }, [user]);
-
-    // useEffect(() => {
-    //     fetch("/posts")
-    //         .then((r) => r.json())
-    //         .then(setPosts);
-    // }, []);
-
 
     function handleDelete() {
         fetch(`/users/${user.id}`, {
@@ -43,8 +28,6 @@ function MySpace({ user, setUser, posts, setPosts }) {
                 :
                 <Card sx={{ padding: '5%', textAlign: 'center' }}>
                     <CardHeader
-                        avatar={<Avatar sx={{ bgcolor: 'black', color: 'white' }} aria-label="recipe"></Avatar>}
-                        action={<IconButton aria-label="settings"></IconButton>}
                         title={`${user.username}`}
                         subheader={`${user.first_name} ${user.last_name}`}
                     />
@@ -52,9 +35,9 @@ function MySpace({ user, setUser, posts, setPosts }) {
                     <Button variant="contained" onClick={handleDelete}>DELETE</Button>
                 </Card>
             }
-            <Grid container spacing={2} sx={{ padding: '5%' }}>
-                <DisplayPosts user={user} posts={posts} setPosts={setPosts} />
-            </Grid>
+
+            <ShowPosts posts={user.posts} setPosts={(posts)=>setUser({...user, posts: posts})} />
+
         </Box>
     )
 }

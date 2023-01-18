@@ -34,7 +34,6 @@ function LoginForm({ setUser }) {
       <CssBaseline />
       <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {error ? <h1>{`${error.errors}`}</h1> : <Typography component="h1" variant="h5">Sign in...</Typography>}
-        {/* <Typography component="h1" variant="h5">Sign in...</Typography> */}
         <form onSubmit={handleSubmit}>
           <TextField
             margin="normal"

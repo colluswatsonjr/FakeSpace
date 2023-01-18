@@ -3,7 +3,7 @@ import { useState } from "react";
 import SignupForm from "../components/SignupForm";
 import LoginForm from "../components/LoginForm";
 
-function LoginPage({ onLogin, setUser }) {
+function LoginPage({ setUser }) {
 
     const [showLogin, setShowLogin] = useState(true);
 

@@ -4,10 +4,10 @@ import DisplayPosts from "../components/DisplayPosts";
 import EditUserForm from "../components/EditUserForm";
 
 
-function MySpace({ user, setUser }) {
+function MySpace({ user, setUser, posts, setPosts }) {
 
     const [isEditing, setIsEditing] = useState(false);
-    const [posts, setPosts] = useState([])
+    // const [posts, setPosts] = useState([])
     // const [myPosts, setMyPosts] = useState([])
 
     // useEffect(() => {
@@ -16,11 +16,11 @@ function MySpace({ user, setUser }) {
     //         .then(setPosts);
     // }, [user]);
 
-    useEffect(() => {
-        fetch("/posts")
-            .then((r) => r.json())
-            .then(setPosts);
-    }, []);
+    // useEffect(() => {
+    //     fetch("/posts")
+    //         .then((r) => r.json())
+    //         .then(setPosts);
+    // }, []);
 
 
     function handleDelete() {
@@ -53,7 +53,7 @@ function MySpace({ user, setUser }) {
                 </Card>
             }
             <Grid container spacing={2} sx={{ padding: '5%' }}>
-                <DisplayPosts user={user} setPosts={setPosts} posts={posts} />
+                <DisplayPosts user={user} posts={posts} setPosts={setPosts} />
             </Grid>
         </Box>
     )

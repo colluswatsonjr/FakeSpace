@@ -1,17 +1,11 @@
 class PostsController < ApplicationController
+    # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+    before_action :authorize
+
     def index
         posts = Post.all.where(user_id: session[:user_id])
         render json: posts
     end
-
-    # def show
-    #     posts = Post.where(user_id: params[:id])
-    #     if posts
-    #         render json: posts, status: :created
-    #     else
-    #         render json: { errors: posts.errors.full_messages }, status: :unprocessable_entity
-    #     end
-    # end
 
     def create
         post = Post.create(page_id:params[:page_id], user_id:session[:user_id], text:params[:text])
@@ -25,10 +19,23 @@ class PostsController < ApplicationController
     def destroy
         post = Post.find_by(id:params[:id])
         if post
-            post.destroy
-            render json: {}
+            if post.user_id === session[:user_id]
+                post.destroy
+                render json: {}
+            else
+                render json: {error: "Not Yours To Delete!!!"}
+            end
         else
             render json: {error:"Post Not Found"}, status: 404
         end
+    end
+
+    private
+
+    # def record_not_found
+    #   render json: { error: "Article not found" }, status: :not_found
+    # end
+    def authorize
+      return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
 end

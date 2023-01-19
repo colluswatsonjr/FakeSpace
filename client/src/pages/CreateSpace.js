@@ -1,44 +1,46 @@
-import { Box, Button, TextField } from "@mui/material"
+import { Alert, Box, Button, TextField } from "@mui/material"
 import { useState } from "react"
 import ShowPage from "../components/ShowPage"
 
 function CreateSpace({ setUser, deleteUserPost }) {
 
     const [form, setForm] = useState({ title: '', bio: '' })
-
+    const [errors, setErrors] = useState(null);
     const [newPage, setNewPage] = useState(null)
 
     function handleSubmit(e) {
         e.preventDefault()
-
         fetch("/pages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(form)
-        })
-            .then((res) => {
+        }).then((res) => {
                 if (res.ok) {
                     res.json().then((page) => setNewPage(page));
                 } else {
-                    res.json().then((err) => console.log(err))
+                    res.json().then((err) => setErrors(err.errors));
                 }
             })
         setForm({ title: '', bio: '' })
     }
 
+
     function handleAddPost(post) {
         setNewPage({ ...newPage, posts: [...newPage.posts, post] })
         setUser(post)
     }
+    console.log(errors)
 
     return (
         <>
+            {errors ? <Alert severity="error">Error! {errors}</Alert> : null}
+
             {newPage ?
-                <ShowPage page={newPage} onAddPost={handleAddPost} setPosts={(posts, id)=>{
+                <ShowPage page={newPage} onAddPost={handleAddPost} setPosts={(posts, id) => {
                     deleteUserPost(id)
-                    setNewPage({...newPage, posts: posts})
+                    setNewPage({ ...newPage, posts: posts })
                 }} setPage={setNewPage} />
                 :
                 <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

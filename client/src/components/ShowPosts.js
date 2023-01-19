@@ -1,24 +1,25 @@
 import { Button, Grid } from "@mui/material"
+import { useState } from "react";
 import ShowPost from "./ShowPost"
 
 
 function ShowPosts({ posts, setPosts }) {
+    const [err, setErr] = useState(null)
     // fetch delete requst post, send new posts and send id to parent component
     function handleDeletePost(id) {
         fetch(`/posts/${id}`, {
             method: "DELETE",
         }).then((r) => {
             if (r.ok) {
+                r.json().then((r)=>{
                 const newPosts = posts.filter((post) => post.id !== id);
                 setPosts(newPosts, id)
-                console.log(r.success)
-            }else{
-                console.log(r)
+                setErr(r)
+                })
             }
-        }).catch((e)=>console.log(e));
-
+        });
     }
-
+    console.log(err)
     return (
         <Grid container spacing={2} sx={{ padding: '5%' }}>
             {posts.map((post) => {

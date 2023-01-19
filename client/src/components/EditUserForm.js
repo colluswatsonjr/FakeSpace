@@ -8,7 +8,7 @@ function EditUserForm({ user, setUser, setEditing }) {
     function handleEditSubmit(e) {
         e.preventDefault()
 
-        fetch(`users/${user.id}`, {
+        fetch(`/users/${user.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

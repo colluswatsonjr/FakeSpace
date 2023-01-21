@@ -4,7 +4,7 @@ import EditUserForm from "../components/EditUserForm";
 import ShowPosts from "../components/ShowPosts";
 
 
-function MySpace({ user, setUser}) {
+function MySpace({ userId, user, setUser}) {
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -36,7 +36,7 @@ function MySpace({ user, setUser}) {
                 </Card>
             }
 
-            <ShowPosts posts={user.posts} setPosts={(posts)=>setUser({...user, posts: posts})} />
+            <ShowPosts userId={userId} posts={user.posts} setPosts={(posts)=>setUser({...user, posts: posts})} />
 
         </Box>
     )

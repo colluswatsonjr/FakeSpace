@@ -2,7 +2,7 @@ import { Alert, Box, Button, TextField } from "@mui/material"
 import { useState } from "react"
 import ShowPage from "../components/ShowPage"
 
-function CreateSpace({ setUser, deleteUserPost }) {
+function CreateSpace({ userId, setUser, deleteUserPost }) {
 
     const [form, setForm] = useState({ title: '', bio: '' })
     const [errors, setErrors] = useState(null);
@@ -38,7 +38,7 @@ function CreateSpace({ setUser, deleteUserPost }) {
             {errors ? <Alert severity="error">Error! {errors}</Alert> : null}
 
             {newPage ?
-                <ShowPage page={newPage} onAddPost={handleAddPost} setPosts={(posts, id) => {
+                <ShowPage  userId={userId} page={newPage} onAddPost={handleAddPost} setPosts={(posts, id) => {
                     deleteUserPost(id)
                     setNewPage({ ...newPage, posts: posts })
                 }} setPage={setNewPage} />

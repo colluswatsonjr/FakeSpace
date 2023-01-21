@@ -1,10 +1,11 @@
-import { Card, Grid } from "@mui/material";
+import { Button, Card, Grid, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import ShowPage from "../components/ShowPage";
 
-function WorldSpace({ setUser, deleteUserPost }) {
+function WorldSpace({ userId, setUser, deleteUserPost }) {
     //hold pages
+
     const [pages, setPages] = useState([])
     const [page, setPage] = useState(null)
     const [search, setSearch] = useState([])
@@ -13,7 +14,7 @@ function WorldSpace({ setUser, deleteUserPost }) {
         fetch("/pages").then((r) => {
             if (r.ok) {
                 r.json().then((pages) => setPages(pages));
-            } else { console.log(r) }
+            }
         });
     }, [])
 
@@ -62,23 +63,20 @@ function WorldSpace({ setUser, deleteUserPost }) {
                 updatePages.push(x)
             }
         })
-
         return setPages(updatePages)
-
     }
-
-
-
+    
     return (
         <>
+
             {page ?
-                <ShowPage page={page} onAddPost={handleAddPost} setPosts={handleUpdatePages} setPage={setPage} />
+                <ShowPage userId={userId} page={page} onAddPost={handleAddPost} setPosts={handleUpdatePages} setPage={setPage} />
                 :
                 <Grid container spacing={2} sx={{ padding: '5%', textAlign: 'center' }}>
-                    <form>
-                        <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
-                        <button onClick={handleSearch}>search...</button>
-                    </form>
+                    <Grid item xs={12}>
+                        <TextField fullWidth rows={2} id="outlined-basic" label="Title of Space..." variant="filled" value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <Button variant="contained" onClick={handleSearch}>search...</Button>
+                    </Grid>
                     <br />
                     {pages.map((page) => {
                         return (

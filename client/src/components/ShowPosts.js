@@ -3,7 +3,7 @@ import { useState } from "react";
 import ShowPost from "./ShowPost"
 
 
-function ShowPosts({ posts, setPosts }) {
+function ShowPosts({ userId, posts, setPosts }) {
     const [err, setErr] = useState(null)
     // fetch delete requst post, send new posts and send id to parent component
     function handleDeletePost(id) {
@@ -26,7 +26,8 @@ function ShowPosts({ posts, setPosts }) {
                 return (
                     <Grid item xs={12} md={6} key={post.id}>
                         <ShowPost post={post} />
-                        <Button variant="contained" onClick={() => handleDeletePost(post.id)}>x</Button>
+                        {post.user_id === userId ? <Button variant="contained" onClick={() => handleDeletePost(post.id)}>x</Button> : null }
+                        {/* <Button variant="contained" onClick={() => handleDeletePost(post.id)}>x</Button> */}
                     </Grid>
                 )
             })}

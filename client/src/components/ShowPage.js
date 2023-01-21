@@ -3,7 +3,7 @@ import { useState } from "react"
 import ShowPosts from "./ShowPosts"
 
 
-function ShowPage({ page, onAddPost, setPosts, setPage }) {
+function ShowPage({ userId, page, onAddPost, setPosts, setPage }) {
 
     const [form, setForm] = useState({ text: '' })
 
@@ -40,7 +40,7 @@ function ShowPage({ page, onAddPost, setPosts, setPage }) {
                 <Button variant="contained" onClick={(e) => handleSubmit(e)}>Submit</Button>
             </Grid>
 
-            <ShowPosts posts={page.posts} setPosts={setPosts}/>
+            <ShowPosts userId={userId} posts={page.posts} setPosts={setPosts}/>
 
         </Box>
     )

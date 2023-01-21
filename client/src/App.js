@@ -35,11 +35,11 @@ function App() {
       <BrowserRouter>
         <Navbar setUser={setUser} />
         <Routes>
-          <Route path="/" element={<WorldSpace user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
+          <Route path="/" element={<WorldSpace userId={user.id} user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
 
-          <Route path="/create" element={<CreateSpace user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
+          <Route path="/create" element={<CreateSpace userId={user.id} user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
 
-          <Route path="/user" element={<MySpace user={user} setUser={setUser} />} />
+          <Route path="/user" element={<MySpace userId={user.id} user={user} setUser={setUser} />} />
         </Routes>
       </BrowserRouter>
     </Container>

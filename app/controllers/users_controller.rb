@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    before_action :authorize, except: [:create]
+
     def index
         users = User.all
         render json: users
@@ -29,6 +31,11 @@ class UsersController < ApplicationController
         end
     end
 
+    def userRelatedPages
+        users = User.find(session[:user_id]).pages
+        render json: users
+    end
+
     def destroy
         user = User.find_by(id:params[:id])
         if user
@@ -43,5 +50,9 @@ class UsersController < ApplicationController
 
     def user_params
         params.permit(:username, :first_name, :last_name, :password, :password_confirmation, :user)
+    end
+
+    def authorize
+      return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
 end

@@ -11,10 +11,10 @@ function ShowPosts({ userId, posts, setPosts }) {
             method: "DELETE",
         }).then((r) => {
             if (r.ok) {
-                r.json().then((r)=>{
-                const newPosts = posts.filter((post) => post.id !== id);
-                setPosts(newPosts, id)
-                setErr(r)
+                r.json().then((r) => {
+                    const newPosts = posts.filter((post) => post.id !== id);
+                    setPosts(newPosts, id)
+                    setErr(r)
                 })
             }
         });
@@ -26,7 +26,7 @@ function ShowPosts({ userId, posts, setPosts }) {
                 return (
                     <Grid item xs={12} md={6} key={post.id}>
                         <ShowPost post={post} />
-                        {post.user_id === userId ? <Button variant="contained" onClick={() => handleDeletePost(post.id)}>x</Button> : null }
+                        {post.user_id === userId ? <Button variant="contained" onClick={() => handleDeletePost(post.id)}>x</Button> : null}
                         {/* <Button variant="contained" onClick={() => handleDeletePost(post.id)}>x</Button> */}
                     </Grid>
                 )

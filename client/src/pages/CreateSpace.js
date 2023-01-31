@@ -31,8 +31,7 @@ function CreateSpace({ userId, setUser, deleteUserPost }) {
         setNewPage({ ...newPage, posts: [...newPage.posts, post] })
         setUser(post)
     }
-    console.log(errors)
-
+    
     return (
         <>
             {errors ? <Alert severity="error">Error! {errors}</Alert> : null}

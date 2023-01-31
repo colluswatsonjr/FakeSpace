@@ -7,6 +7,11 @@ class PostsController < ApplicationController
         render json: posts
     end
 
+    def longestPosts
+        posts = Post.all.sort { |x,y| y.text.length <=> x.text.length }[0..4]
+        render json: posts
+    end
+
     def create
         post = Post.create(page_id:params[:page_id], user_id:session[:user_id], text:params[:text])
         if post.valid?

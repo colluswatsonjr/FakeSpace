@@ -8,6 +8,7 @@ import WorldSpace from "./pages/WorldSpace";
 import CreateSpace from "./pages/CreateSpace";
 
 import Container from '@mui/material/Container';
+import { Button } from "@mui/material";
 
 function App() {
   //set user to pass to componenets
@@ -27,6 +28,23 @@ function App() {
     const deletePost = user.posts.filter((post)=>post.id !== id)
     setUser({...user, posts: deletePost})
   }
+
+  function getLongestPosts(){
+    fetch('/getPosts').then((r)=>{
+      if (r.ok){
+        r.json().then((posts)=>console.log(posts))
+      }
+    })
+  }
+  function getPagesUserPostedOn(){
+    console.log('heres user related pages')
+    fetch('/userRelatedPages').then((r)=>{
+      if (r.ok){
+        r.json().then((posts)=>console.log(posts))
+      }
+    })
+  }
+
   //if user not present show loginpage
   if (!user) return <LoginPage setUser={setUser} />;
 
@@ -34,7 +52,10 @@ function App() {
     <Container maxWidth="lg" sx={{ textAlign:'center'}}>
       <BrowserRouter>
         <Navbar setUser={setUser} />
+        <Button onClick={()=>getLongestPosts()}>Get Longest Posts</Button>
+        <Button onClick={()=>getPagesUserPostedOn()}>Get Pages Current User Posted On</Button>
         <Routes>
+          
           <Route path="/" element={<WorldSpace userId={user.id} user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
 
           <Route path="/create" element={<CreateSpace userId={user.id} user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />

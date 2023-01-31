@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  resources :posts
   resources :pages
+  resources :posts
   resources :users
 
-  get "/pages/:id", to: 'pages#show'
   get '/search', to: 'pages#search'
 
-  # get "/posts/:user", to: 'posts#show'
+  get "/getPosts", to: 'posts#longestPosts'
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
+  get "/userRelatedPages", to: 'users#userRelatedPages'
+
 
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

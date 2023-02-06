@@ -17,7 +17,7 @@ function MySpace({ userId, user, setUser}) {
             }
         });
     }
-
+    
     return (
         <Box sx={{ padding: '5%' }}>
             {isEditing ?

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
 
   get '/search', to: 'pages#search'
+  get '/many_posts', to: 'pages#higherPages'
 
   get "/getPosts", to: 'posts#longestPosts'
 

@@ -15,7 +15,7 @@ function ShowPage({ userId, page, onAddPost, setPosts, setPage }) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ page_id: page.id, ...form })
+            body: JSON.stringify({ page_id: page.id,  ...form })
         })
             .then(r => r.json())
             .then(post => onAddPost(post))

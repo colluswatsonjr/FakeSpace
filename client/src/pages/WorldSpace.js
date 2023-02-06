@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import ShowPage from "../components/ShowPage";
 
-function WorldSpace({ userId, setUser, deleteUserPost }) {
+function WorldSpace({ userId, user, setUser, deleteUserPost }) {
     //hold pages
 
     const [pages, setPages] = useState([])
@@ -65,14 +65,35 @@ function WorldSpace({ userId, setUser, deleteUserPost }) {
         })
         return setPages(updatePages)
     }
-    
+
+    function getPagesUserPostedOn() {
+        console.log('heres user related pages')
+        let unique = user.pages.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
+        setPages(unique)
+        // fetch('/userRelatedPages').then((r) => {
+        //     if (r.ok) {
+        //         r.json().then((pages) => {
+        //             //filters out duplicate objects
+        //             let unique = pages.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
+
+        //             setPages(unique)
+        //         })
+        //     }
+        // })
+    }
+
     return (
         <>
+
 
             {page ?
                 <ShowPage userId={userId} page={page} onAddPost={handleAddPost} setPosts={handleUpdatePages} setPage={setPage} />
                 :
+
                 <Grid container spacing={2} sx={{ padding: '5%', textAlign: 'center' }}>
+
+                    <Button onClick={() => getPagesUserPostedOn()}>Get Pages Current User Posted On</Button>
+
                     <Grid item xs={12}>
                         <TextField fullWidth rows={2} id="outlined-basic" label="Title of Space..." variant="filled" value={search} onChange={(e) => setSearch(e.target.value)} />
                         <Button variant="contained" onClick={handleSearch}>search...</Button>

@@ -36,14 +36,7 @@ function App() {
       }
     })
   }
-  function getPagesUserPostedOn(){
-    console.log('heres user related pages')
-    fetch('/userRelatedPages').then((r)=>{
-      if (r.ok){
-        r.json().then((posts)=>console.log(posts))
-      }
-    })
-  }
+
 
   //if user not present show loginpage
   if (!user) return <LoginPage setUser={setUser} />;
@@ -53,14 +46,13 @@ function App() {
       <BrowserRouter>
         <Navbar setUser={setUser} />
         <Button onClick={()=>getLongestPosts()}>Get Longest Posts</Button>
-        <Button onClick={()=>getPagesUserPostedOn()}>Get Pages Current User Posted On</Button>
         <Routes>
           
           <Route path="/" element={<WorldSpace userId={user.id} user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
 
-          <Route path="/create" element={<CreateSpace userId={user.id} user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
+          <Route path="/page/new" element={<CreateSpace userId={user.id} user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />
 
-          <Route path="/user" element={<MySpace userId={user.id} user={user} setUser={setUser} />} />
+          <Route path="/profile" element={<MySpace userId={user.id} user={user} setUser={setUser} />} />
         </Routes>
       </BrowserRouter>
     </Container>

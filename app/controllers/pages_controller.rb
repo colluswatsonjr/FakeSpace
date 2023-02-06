@@ -16,7 +16,7 @@ class PagesController < ApplicationController
     # end
 
     def create
-        page = Page.create(title:params[:title], bio:params[:bio])
+        page = Page.create(page_params)
         if page.valid?
             render json: page, status: :created
         else
@@ -34,7 +34,22 @@ class PagesController < ApplicationController
         end
     end
 
+    def higherPages
+        pages = Page.all.map do |page|
+            if page.posts.length > params[:size]
+                page
+            end
+        end
+
+        render json: pages
+    end
+
     private
+
+
+    def page_params
+        params.permit(:title, :bio, :size)
+    end
     
     def authorize
       return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id

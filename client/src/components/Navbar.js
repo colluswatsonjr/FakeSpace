@@ -27,13 +27,13 @@ function Navbar({ setUser }) {
                         </Button>
                     </Link>
 
-                    <Link to="/create">
+                    <Link to="/page/new">
                         <Button sx={{ color:'black', display: 'block' }}>
-                            create
+                            create space
                         </Button>
                     </Link>
 
-                    <Link to="/user">
+                    <Link to="/profile">
                         <Button sx={{ color:'black', display: 'block' }}>
                             home
                         </Button>

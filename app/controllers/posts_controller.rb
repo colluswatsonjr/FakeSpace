@@ -13,7 +13,8 @@ class PostsController < ApplicationController
     end
 
     def create
-        post = Post.create(page_id:params[:page_id], user_id:session[:user_id], text:params[:text])
+        user = User.find(session[:user_id])
+        post = user.posts.create(post_params)
         if post.valid?
             render json: post, status: :created
         else
@@ -22,7 +23,8 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        post = Post.find_by(id:params[:id])
+        user = User.find(session[:user_id])
+        post = user.posts.find_by(id:params[:id])
         if post
             if post.user_id === session[:user_id]
                 post.destroy
@@ -37,9 +39,9 @@ class PostsController < ApplicationController
 
     private
 
-    # def record_not_found
-    #   render json: { error: "Article not found" }, status: :not_found
-    # end
+    def post_params
+        params.permit(:page_id, :text)
+    end
     def authorize
       return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end

@@ -34,13 +34,10 @@ class PagesController < ApplicationController
         end
     end
 
-    def higherPages
+    def pagePosts
         pages = Page.all.map do |page|
-            if page.posts.length > params[:size]
-                page
-            end
+            page.postSize(params[:size])
         end
-
         render json: pages
     end
 

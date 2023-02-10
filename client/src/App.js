@@ -30,12 +30,20 @@ function App() {
   }
 
   function getLongestPosts(){
+    console.log('heres top 5 posts longest posts')
+
     fetch('/getPosts').then((r)=>{
       if (r.ok){
         r.json().then((posts)=>console.log(posts))
       }
     })
   }
+
+  function getPagesUserPostedOn() {
+    console.log('heres user related pages')
+    let unique = user.pages.filter((v,i,a)=>a.findIndex(v2=>(v2.id===v.id))===i)
+    console.log(unique)
+}
 
 
   //if user not present show loginpage
@@ -46,6 +54,8 @@ function App() {
       <BrowserRouter>
         <Navbar setUser={setUser} />
         <Button onClick={()=>getLongestPosts()}>Get Longest Posts</Button>
+        <Button onClick={() => getPagesUserPostedOn()}>Get Pages Current User Posted On</Button>
+
         <Routes>
           
           <Route path="/" element={<WorldSpace userId={user.id} user={user} setUser={(post)=>setUser({...user, posts:[...user.posts, post]})} deleteUserPost={handleDeleteUserPost} />} />

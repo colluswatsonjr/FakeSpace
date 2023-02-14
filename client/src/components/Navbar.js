@@ -27,9 +27,9 @@ function Navbar({ setUser }) {
                         </Button>
                     </Link>
 
-                    <Link to="/page">
+                    <Link to="/create">
                         <Button sx={{ color: 'black', display: 'block' }}>
-                            page
+                            create
                         </Button>
                     </Link>
 

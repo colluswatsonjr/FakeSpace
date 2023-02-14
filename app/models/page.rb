@@ -5,7 +5,7 @@ class Page < ApplicationRecord
     has_many :users, through: :posts
     
     def postSize(size)
-      if self.posts.length > size.to_i
+      if self.posts.length >= size.to_i
         self
       end
   end

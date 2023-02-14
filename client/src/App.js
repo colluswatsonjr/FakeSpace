@@ -84,7 +84,7 @@ function App() {
             :
             <>
               <Route path="/" element={!user ? <Navigate to="/" replace /> : <WorldSpace userId={user.id} user={user} setUser={(post) => setUser({ ...user, posts: [...user.posts, post] })} deleteUserPost={handleDeleteUserPost} />} />
-              <Route path="/page" element={!user ? <Navigate to="/" replace /> : <CreateSpace userId={user.id} user={user} setUser={(post) => setUser({ ...user, posts: [...user.posts, post] })} deleteUserPost={handleDeleteUserPost} />} />
+              <Route path="/create" element={!user ? <Navigate to="/" replace /> : <CreateSpace userId={user.id} user={user} setUser={(post) => setUser({ ...user, posts: [...user.posts, post] })} deleteUserPost={handleDeleteUserPost} />} />
               <Route path="/profile" element={!user ? <Navigate to="/" replace /> : <MySpace userId={user.id} user={user} setUser={setUser} />} />
               <Route path="*" element={<PageNotFound />} />
             </>

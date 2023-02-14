@@ -1,5 +1,6 @@
 import { Box, Button, Container, CssBaseline, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function LoginForm({ setUser }) {
   const [error, setError] = useState('')
@@ -57,14 +58,14 @@ function LoginForm({ setUser }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Login
-          </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Login
+            </Button>
 
 
         </form>

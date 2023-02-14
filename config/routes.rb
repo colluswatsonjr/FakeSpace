@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :pages
-  resources :posts
-  resources :users
+  resources :pages, only: [:index, :create]
+  resources :posts, only:  [:create, :destroy]
+  resources :users, only: [:update, :destroy]
 
   get '/search', to: 'pages#search'
   get '/pagePosts/:size', to: 'pages#pagePosts'
@@ -10,8 +10,8 @@ Rails.application.routes.draw do
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
-  get "/userRelatedPages", to: 'users#userRelatedPages'
 
+  get "/userRelatedPages", to: 'users#userRelatedPages'
 
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

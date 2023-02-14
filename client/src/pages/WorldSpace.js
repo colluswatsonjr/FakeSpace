@@ -75,7 +75,6 @@ function WorldSpace({ userId, user, setUser, deleteUserPost }) {
             {page ?
                 <ShowPage userId={userId} page={page} onAddPost={handleAddPost} setPosts={handleUpdatePages} setPage={setPage} />
                 :
-
                 <Grid container spacing={2} sx={{ padding: '5%', textAlign: 'center' }}>
 
                     <Grid item xs={12}>
